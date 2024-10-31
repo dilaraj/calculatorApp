@@ -45,56 +45,9 @@ populateDisplay = () => {
     //let selectedBtn;
     for ( let i = 0; i < element.length; i++ ) {
         element[i].addEventListener('click', () => {
-            if (selectedCount < 3) {
-                // if (selectedCount == 0) {
-                //     // Entering a number
-                //     currentInput += element[i].value; // Creating a number and not making it apart of the number count even if it is more than one digit
-                //     num1 = parseFloat(currentInput);
-                //     display.innerHTML = num1;
-                //     currentInput = ''; // Reseting current input for next number;
-                //     selectedCount++;
-                // } 
-                // else if (selectedCount == 1) {
-                //     display.innerHTML += element[i].value;
-                //     operation += element[i].value;
-                //     selectedCount++;
-                // }
-                // else if (selectedCount == 2) {
-                //     currentInput += element[i].value; // Creating a number and not making it apart of the number count even if it is more than one digit
-                //     num2 = parseFloat(currentInput);
-                //     display.innerHTML += num2;
-                // }
-
-                // if (selectedCount === 0) {
-                //     num1 = parseFloat(currentInput);
-                //     currentInput = ''; // Reseting current input for next number;
-                //     selectedCount++;
-                // }
-                // else if (selectedCount === 2) {
-                //     num2 = parseFloat(currentInput);
-                // }
-
-                // My solution
-                if (selectedCount == 0) {
-                    currentInput += element[i].value;
-                    display.innerHTML = currentInput;
-                    num1 = parseFloat(currentInput);
-                    currentInput = ''
-                    selectedCount++;
-                } 
-                else if (selectedCount == 1) {
-                    display.innerHTML += element[i].value
-                    operation = element[i].value;
-                    selectedCount++;
-                } 
-                else if (selectedCount == 2) {
-                    currentInput += element[i].value;
-                    display.innerHTML += parseFloat(currentInput);
-                    num2 = parseFloat(currentInput);
-                    currentInput = '';         
-                } 
-                
-            }
+            currentInput += element[i].value;
+            display.innerHTML = currentInput;
+            // Split the string into an array using the match function
         });  
     }
 
@@ -119,3 +72,55 @@ populateDisplay();
 
 //To-Do
 // - When the = is selected, let it display the answer only without the numbers selected
+
+// Old calculation code
+if (selectedCount < 3) {
+    // if (selectedCount == 0) {
+    //     // Entering a number
+    //     currentInput += element[i].value; // Creating a number and not making it apart of the number count even if it is more than one digit
+    //     num1 = parseFloat(currentInput);
+    //     display.innerHTML = num1;
+    //     currentInput = ''; // Reseting current input for next number;
+    //     selectedCount++;
+    // } 
+    // else if (selectedCount == 1) {
+    //     display.innerHTML += element[i].value;
+    //     operation += element[i].value;
+    //     selectedCount++;
+    // }
+    // else if (selectedCount == 2) {
+    //     currentInput += element[i].value; // Creating a number and not making it apart of the number count even if it is more than one digit
+    //     num2 = parseFloat(currentInput);
+    //     display.innerHTML += num2;
+    // }
+
+    // if (selectedCount === 0) {
+    //     num1 = parseFloat(currentInput);
+    //     currentInput = ''; // Reseting current input for next number;
+    //     selectedCount++;
+    // }
+    // else if (selectedCount === 2) {
+    //     num2 = parseFloat(currentInput);
+    // }
+
+    // My solution
+    if (selectedCount == 0) {
+        currentInput += element[i].value;
+        display.innerHTML = currentInput;
+        num1 = parseFloat(currentInput);
+        currentInput = '';
+        selectedCount++;
+    } 
+    else if (selectedCount == 1) {
+        display.innerHTML += parseFloat(element[i].value);
+        operation = element[i].value;
+        selectedCount++;
+    } 
+    else if (selectedCount == 2) {
+        currentInput += element[i].value;
+        display.innerHTML += parseFloat(currentInput);
+        num2 = parseFloat(currentInput);
+        currentInput = '';         
+    } 
+    
+}
