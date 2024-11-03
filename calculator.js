@@ -9,21 +9,16 @@ let num1, num2, operation;
 let currentInput = '';
 
 // Creating basic math operation functions
-let add = (n1, n2) => {
-    return n1 + n2;
-}
-
-let subtract = (n1, n2) => {
-    return n1 - n2;
-}
-
-let multiply = (n1, n2) => {
-    return n1 * n2;
-}
-
-let divide = (n1, n2) => {
-    return n1 / n2;
-}
+const add = (n1, n2) => n1 + n2;
+const subtract = (n1, n2) => n1 - n2;
+const multiply = (n1, n2) => n1 * n2;
+const divide = (n1, n2) => {
+    if (n1 == '0') {
+        display.innerHTML = "You can't do that silly";
+    } else {
+        return n1 / n2
+    }
+};
 
 // Operate function
 let operate = (n1, oper, n2) => {
@@ -42,85 +37,51 @@ let operate = (n1, oper, n2) => {
 // Displaying buttons values in display screen
 populateDisplay = () => {
     let selectedCount = 0;
-    //let selectedBtn;
     for ( let i = 0; i < element.length; i++ ) {
         element[i].addEventListener('click', () => {
-            currentInput += element[i].value;
-            display.innerHTML = currentInput;
-            // Split the string into an array using the match function
+            const value = element[i].value;
+
+            if (['+', '−', '×', '÷'].includes(value)) { // If an operator is clicked
+                if (num1 !== undefined && !operation) {
+                    operation = value; // Set operation is num1 is already set
+                    currentInput += value;
+                    display.innerHTML = currentInput;
+                }
+            } else { // If a number is clicked
+                currentInput += value;
+                display.innerHTML = currentInput;
+
+                if (!operation) {
+                    num1 = parseFloat(currentInput);
+                } else {
+                    num2 = parseFloat(currentInput.split(operation)[1])
+                }
+            }
         });  
     }
+    
 
     equals.addEventListener('click', () => {
-        const result = operate(num1, operation, num2);
-        display.innerHTML = result;
-        selectedCount = 0;
-        num1 = num2 = operation = undefined;
+        if (num1, operation, num2) {
+            const result = operate(num1, operation, num2);
+            display.innerHTML = result;
+
+            num1 = result;
+            num2 = operation = undefined;
+            currentInput = result.toString();
+            selectedCount = 0;
+        } else {
+            display.innerHTML = "Enter a full equation!!"
+        }
+        
     })
 
     clr.addEventListener('click', () => {
         display.innerHTML = '0';
-        selectedCount = 0;
         num1 = num2 = operation = undefined;
+        currentInput = '';
     })
 }
 
 
-
 populateDisplay();
-//console.log(num1, operation, num2)
-
-//To-Do
-// - When the = is selected, let it display the answer only without the numbers selected
-
-// Old calculation code
-if (selectedCount < 3) {
-    // if (selectedCount == 0) {
-    //     // Entering a number
-    //     currentInput += element[i].value; // Creating a number and not making it apart of the number count even if it is more than one digit
-    //     num1 = parseFloat(currentInput);
-    //     display.innerHTML = num1;
-    //     currentInput = ''; // Reseting current input for next number;
-    //     selectedCount++;
-    // } 
-    // else if (selectedCount == 1) {
-    //     display.innerHTML += element[i].value;
-    //     operation += element[i].value;
-    //     selectedCount++;
-    // }
-    // else if (selectedCount == 2) {
-    //     currentInput += element[i].value; // Creating a number and not making it apart of the number count even if it is more than one digit
-    //     num2 = parseFloat(currentInput);
-    //     display.innerHTML += num2;
-    // }
-
-    // if (selectedCount === 0) {
-    //     num1 = parseFloat(currentInput);
-    //     currentInput = ''; // Reseting current input for next number;
-    //     selectedCount++;
-    // }
-    // else if (selectedCount === 2) {
-    //     num2 = parseFloat(currentInput);
-    // }
-
-    // My solution
-    if (selectedCount == 0) {
-        currentInput += element[i].value;
-        display.innerHTML = currentInput;
-        num1 = parseFloat(currentInput);
-        currentInput = '';
-        selectedCount++;
-    } 
-    else if (selectedCount == 1) {
-        display.innerHTML += parseFloat(element[i].value);
-        operation = element[i].value;
-        selectedCount++;
-    } 
-    else if (selectedCount == 2) {
-        currentInput += element[i].value;
-        display.innerHTML += parseFloat(currentInput);
-        num2 = parseFloat(currentInput);
-        currentInput = '';         
-    } 
-    
-}
